@@ -14,6 +14,10 @@
                     <Col span="20"><p> {{formData.instance_id}}</p></Col>
                 </Row>
                 <Row>
+                    <Col span="4"><p> <b>过期时间：</b> </p></Col>
+                    <Col span="20"><p> <Tag color="blue">{{formData.expired_time}}</tab></p></Col>
+                </Row>
+                <Row>
                     <Col span="4"><p> <b>实例状态：</b> </p></Col>
                     <Col span="8"><p> <Tag color="blue">{{formData.instance_state}}</tag> </p></Col>
                     <Col span="4"><p> <b>实例类型：</b> </p></Col>

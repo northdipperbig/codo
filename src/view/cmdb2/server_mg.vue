@@ -377,13 +377,13 @@ export default {
           align: "center",
           sortable: true
         },
-        // {
-        //   title: "管理用户",
-        //   key: "admin_user",
-        //   width: 150,
-        //   align: "center",
-        //   sortable: true
-        // },
+        {
+          title: "过期时间",
+          key: "expired_time",
+          width: 150,
+          align: "center",
+          sortable: true
+        },
 
         {
           title: "状态",
