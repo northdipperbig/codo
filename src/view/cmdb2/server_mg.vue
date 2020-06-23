@@ -419,9 +419,37 @@ export default {
             } else if (state === "auto") {
               return h("div", [h("Tag", { props: { color: "blue" } }, "Auto")]);
             } else if (state === "Running") {
-              return h("div", [h("Tag", { props: { color: "green" } }, "Running")]);
+              return h("div", [
+                h(
+                  "Button",
+                  {
+                    props: {
+                      type: "success",
+                      size: "small"
+                    },
+                    style: {
+                      marginRight: "4px"
+                    }
+                  },
+                  "Running"
+                )
+              ]);
             } else if (state === "Stopped") {
-              return h("div", [h("S", { props: { color: "red" } }, "Stopped")]);
+              return h("div", [
+                h(
+                  "Button",
+                  {
+                    props: {
+                      type: "error",
+                      size: "small"
+                    },
+                    style: {
+                      marginRight: "4px"
+                    }
+                  },
+                  "Stopped"
+                )
+              ]);
             } else {
               return h("div", [
                 h(
@@ -657,7 +685,6 @@ export default {
     getServerList(key, value) {
       getServerList(this.pageNum, this.pageSize, key, value).then(res => {
         if (res.data.code === 0) {
-          // console.log('count-->',res.data.count)
           this.pageTotal = res.data.count;
           this.tableData = res.data.data;
         } else {
@@ -667,7 +694,6 @@ export default {
     },
     // 获取主机详情
     getServerDetailList(key, value) {
-      // console.log('key, vlaue', key,value)
       getServerDetailList(key, value).then(res => {
         if (res.data.code === 0) {
           this.serverDetail = res.data.data[0];
@@ -694,7 +720,6 @@ export default {
     getAdminUserList(page, limit, key, value) {
       getAdminUserList(page, limit, key, value).then(res => {
         if (res.data.code === 0) {
-          // this.$Message.success(`${res.data.msg}`)
           this.admUserList = res.data.data;
         } else {
           this.$Message.error(`${res.data.msg}`);
@@ -705,9 +730,7 @@ export default {
     getIDCList() {
       getIDClist().then(res => {
         if (res.data.code === 0) {
-          // this.$Message.success(`${res.data.msg}`)
           this.allIDCList = res.data.data;
-          // console.log(this.allTagList)
         }
       });
     },
@@ -716,9 +739,7 @@ export default {
     getTagList() {
       getTagList().then(res => {
         if (res.data.code === 0) {
-          // this.$Message.success(`${res.data.msg}`)
           this.allTagList = res.data.data;
-          // console.log(this.allTagList)
         }
       });
     },
@@ -732,8 +753,6 @@ export default {
     },
     handleDetail(paramsRow) {
       this.dialog2.show = true;
-      // this.getTagList()
-      // this.getAdminUserList()
       this.serverDetail = {
         cpu: "",
         cpu_count: "",
@@ -752,8 +771,6 @@ export default {
       this.getServerDetailList("ip", paramsRow.ip);
 
       setTimeout(() => {
-        // const tag_list = paramsRow.tag_list.join(',')
-        // if (tag_list) {tag_list.join(' ')}
         this.formValidate = {
           id: paramsRow.id,
           hostname: paramsRow.hostname,
@@ -765,6 +782,7 @@ export default {
           admin_user: paramsRow.admin_user,
           tag_list: paramsRow.tag_list,
           detail: paramsRow.detail,
+          expired_time: this.expired_time,
           instance_id: this.serverDetail.instance_id,
           instance_type: this.serverDetail.instance_type,
           instance_state: this.serverDetail.instance_state,
