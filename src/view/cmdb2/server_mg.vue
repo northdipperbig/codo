@@ -782,7 +782,7 @@ export default {
           admin_user: paramsRow.admin_user,
           tag_list: paramsRow.tag_list,
           detail: paramsRow.detail,
-          expired_time: this.expired_time,
+          expired_time: this.serverDetail.expired_time,
           instance_id: this.serverDetail.instance_id,
           instance_type: this.serverDetail.instance_type,
           instance_state: this.serverDetail.instance_state,
