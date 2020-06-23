@@ -419,9 +419,9 @@ export default {
             } else if (state === "auto") {
               return h("div", [h("Tag", { props: { color: "blue" } }, "Auto")]);
             } else if (state === "Running") {
-              return h("div", [h("Tag", { props: { color: "blue" } }, "Running")]);
+              return h("div", [h("Tag", { props: { color: "green" } }, "Running")]);
             } else if (state === "Stopped") {
-              return h("div", [h("S", { props: { color: "blue" } }, "Stopped")]);
+              return h("div", [h("S", { props: { color: "red" } }, "Stopped")]);
             } else {
               return h("div", [
                 h(
