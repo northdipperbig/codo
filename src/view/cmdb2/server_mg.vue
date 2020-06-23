@@ -382,7 +382,23 @@ export default {
           key: "expired_time",
           width: 150,
           align: "center",
-          sortable: true
+          sortable: true,
+		  render: (h, params) => {
+			let etime = params.row.expired_time
+			let nowtime = new Date()
+			let EtimeSplit = etime.split(" ")
+			let DEtime = EtimeSplit[0].split("-")
+			let TEtime = EtimeSplit[1].split(":")
+			let ETime = new Date(DEtime[0], DEtime[1] - 1, DEtime[2], TEtime[0], TEtime[1], TEtime[2])
+			let eDays = parseInt((ETime - nowtime)/(24 * 3600 * 1000))
+			if(eDays <= 7){
+				return h("div", { style: { background: "orange", color: "white" } }, etime)
+			}else if (eDays <= 3){
+				return h("div", { style: { background: "red", color: "white" } }, etime)
+			}else{
+				return h("div", { style: { background: "green", color: "white" } }, etime)
+			}
+		  }
         },
 
         {
@@ -402,6 +418,10 @@ export default {
               ]);
             } else if (state === "auto") {
               return h("div", [h("Tag", { props: { color: "blue" } }, "Auto")]);
+            } else if (state === "Running") {
+              return h("div", [h("Tag", { props: { color: "blue" } }, "Running")]);
+            } else if (state === "Stopped") {
+              return h("div", [h("S", { props: { color: "blue" } }, "Stopped")]);
             } else {
               return h("div", [
                 h(
