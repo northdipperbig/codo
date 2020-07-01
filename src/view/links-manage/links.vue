@@ -257,6 +257,7 @@ export default {
   mounted () {
     this.getLinksList(this.pageNum, this.pageSize)
   }
+  }
 }
 </script>
 

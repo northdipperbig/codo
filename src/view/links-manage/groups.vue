@@ -239,6 +239,7 @@ export default {
   mounted () {
     this.getLinksGroupList(this.pageNum, this.pageSize)
   }
+  }
 }
 </script>
 
