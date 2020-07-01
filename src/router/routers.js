@@ -13,6 +13,135 @@ import parentView from '@/components/parent-view'
  */
 
 export const routerMap = [{
+        path: '/cmdb',
+        name: 'cmdb',
+        meta: {
+            icon: 'ios-cube',
+            title: '资产管理'
+        },
+        component: Main,
+        children: [{
+                path: 'asset_server',
+                name: 'asset_server',
+                meta: {
+                    icon: 'ios-cube',
+                    title: '主机管理'
+                },
+                component: () =>
+                    import ('@/view/cmdb2/server_mg.vue')
+            },
+            {
+                path: 'asset_db',
+                name: 'asset_db',
+                meta: {
+                    icon: 'ios-cube',
+                    title: 'DB管理'
+                },
+                component: () =>
+                    import ('@/view/cmdb2/db_mg.vue')
+            },
+            {
+                path: 'asset_idc',
+                name: 'asset_idc',
+                meta: {
+                    icon: 'ios-cube',
+                    title: 'IDC管理'
+                },
+                component: () =>
+                    import ('@/view/cmdb2/asset_idc.vue')
+            },
+            {
+                path: 'operational_audit',
+                name: 'operational_audit',
+                meta: {
+                    icon: 'md-build',
+                    title: '操作审计'
+                },
+                component: () =>
+                    import ('@/view/cmdb2/operational_audit.vue')
+            },
+
+            // {
+            //     path: 'log_audit',
+            //     name: 'log_audit',
+            //     meta: {
+            //         icon: 'md-build',
+            //         title: '日志审计'
+            //     },
+            //     component: () =>
+            //         import ('@/view/cmdb2/log_audit.vue')
+            // },
+            {
+                path: 'tag_mg',
+                name: 'tag_mg',
+                meta: {
+                    icon: 'ios-pricetag',
+                    title: '标签管理'
+                },
+                component: () =>
+                    import ('@/view/cmdb2/tag_mg.vue')
+            },
+            {
+                path: 'admin_user',
+                name: 'admin_user',
+                meta: {
+                    icon: 'ios-ribbon',
+                    title: '管理用户'
+                },
+                component: () =>
+                    import ('@/view/cmdb2/admin_user.vue')
+            },
+            // {
+            //     path: 'system_user',
+            //     name: 'system_user',
+            //     meta: {
+            //         icon: 'ios-ribbon',
+            //         title: '系统用户'
+            //     },
+            //     component: () =>
+            //         import ('@/view/cmdb2/system_user.vue')
+            // },
+            {
+                path: 'asset_config',
+                name: 'asset_config',
+                meta: {
+                    icon: 'ios-hammer',
+                    title: '资产配置'
+                },
+                component: () =>
+                    import ('@/view/cmdb2/asset_config.vue')
+            }
+        ]
+    },{
+        path: '/links',
+        name: 'linksmanager',
+        meta: {
+            icon: 'md-contacts',
+            title: '链接管理'
+        },
+        component: Main,
+        children: [{
+                path: 'links',
+                name: 'links',
+                meta: {
+                    icon: 'ios-people',
+                    title: '链接列表'
+                },
+                component: () =>
+                    import ('@/view/links-manage/links.vue')
+            },
+            {
+                path: 'links/group',
+                name: 'linksgroup',
+                meta: {
+                    icon: 'ios-lock',
+                    title: '链接分组管理'
+                },
+                component: () =>
+                    import ('@/view/links-manage/groups.vue')
+            }
+        ]
+    }, {
         path: '/order',
         name: 'order',
         meta: {
@@ -41,8 +170,7 @@ export const routerMap = [{
                     import ('@/view/task-order/history-task-list.vue')
             }
         ]
-    },
-    {
+    }, {
         path: '/taskCenter',
         name: 'taskCenter',
         meta: {
@@ -142,8 +270,7 @@ export const routerMap = [{
             //         import ('@/view/tasks-center/task-submit/my_collect.vue')
             // },
         ]
-    },
-    {
+    }, {
         path: '/assetPurchase',
         name: 'assetPurchase',
         meta: {
@@ -247,107 +374,7 @@ export const routerMap = [{
     //         }
     //     ]
     // },
-    {
-        path: '/cmdb',
-        name: 'cmdb',
-        meta: {
-            icon: 'ios-cube',
-            title: '资产管理'
-        },
-        component: Main,
-        children: [{
-                path: 'asset_server',
-                name: 'asset_server',
-                meta: {
-                    icon: 'ios-cube',
-                    title: '主机管理'
-                },
-                component: () =>
-                    import ('@/view/cmdb2/server_mg.vue')
-            },
-            {
-                path: 'asset_db',
-                name: 'asset_db',
-                meta: {
-                    icon: 'ios-cube',
-                    title: 'DB管理'
-                },
-                component: () =>
-                    import ('@/view/cmdb2/db_mg.vue')
-            },
-            {
-                path: 'asset_idc',
-                name: 'asset_idc',
-                meta: {
-                    icon: 'ios-cube',
-                    title: 'IDC管理'
-                },
-                component: () =>
-                    import ('@/view/cmdb2/asset_idc.vue')
-            },
-            {
-                path: 'operational_audit',
-                name: 'operational_audit',
-                meta: {
-                    icon: 'md-build',
-                    title: '操作审计'
-                },
-                component: () =>
-                    import ('@/view/cmdb2/operational_audit.vue')
-            },
-
-            // {
-            //     path: 'log_audit',
-            //     name: 'log_audit',
-            //     meta: {
-            //         icon: 'md-build',
-            //         title: '日志审计'
-            //     },
-            //     component: () =>
-            //         import ('@/view/cmdb2/log_audit.vue')
-            // },
-            {
-                path: 'tag_mg',
-                name: 'tag_mg',
-                meta: {
-                    icon: 'ios-pricetag',
-                    title: '标签管理'
-                },
-                component: () =>
-                    import ('@/view/cmdb2/tag_mg.vue')
-            },
-            {
-                path: 'admin_user',
-                name: 'admin_user',
-                meta: {
-                    icon: 'ios-ribbon',
-                    title: '管理用户'
-                },
-                component: () =>
-                    import ('@/view/cmdb2/admin_user.vue')
-            },
-            // {
-            //     path: 'system_user',
-            //     name: 'system_user',
-            //     meta: {
-            //         icon: 'ios-ribbon',
-            //         title: '系统用户'
-            //     },
-            //     component: () =>
-            //         import ('@/view/cmdb2/system_user.vue')
-            // },
-            {
-                path: 'asset_config',
-                name: 'asset_config',
-                meta: {
-                    icon: 'ios-hammer',
-                    title: '资产配置'
-                },
-                component: () =>
-                    import ('@/view/cmdb2/asset_config.vue')
-            }
-        ]
-    },
+    
     {
         path: '/web_ssh',
         name: 'web_ssh',
