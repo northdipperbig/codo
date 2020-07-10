@@ -135,7 +135,7 @@ export const routerMap = [{
                 name: 'linksgroup',
                 meta: {
                     icon: 'ios-lock',
-                    title: '链接分组管理'
+                    title: '分组管理'
                 },
                 component: () =>
                     import ('@/view/links-manage/groups.vue')
@@ -662,16 +662,25 @@ export const routerMap = [{
         },
         component: Main,
         children: [{
-                path: 'domain_name_manage',
-                name: 'domain_name_manage',
-                meta: {
-                    icon: 'ios-cloudy',
-                    title: '域名解析'
-                },
-                component: () =>
-                    import ('@/view/domain-name/domain-name-manage.vue')
-            },
-            {
+          path: 'domain_list',
+          name: 'domain_list',
+          meta: {
+              icon: 'ios-cloudy',
+              title: '域名列表'
+          },
+          component: () =>
+              import ('@/view/domain-name/domain-list.vue')
+        },
+        {
+          path: 'domain_name_manage',
+          name: 'domain_name_manage',
+          meta: {
+            icon: 'ios-cloudy',
+            title: '本地域名解析'
+          },
+          component: () =>
+            import('@/view/domain-name/domain-name-manage.vue')
+        },{
                 path: 'domain_name_monitor',
                 name: 'domain_name_monitor',
                 meta: {
@@ -680,7 +689,13 @@ export const routerMap = [{
                 },
                 component: () =>
                     import ('@/view/domain-name/domain-name-monitor.vue')
-            }
+          },
+          {
+            path: "/private",
+            name: "private_manage",
+            meta: { icon: 'ios-cloudy', title: '域名供应商' },
+            component: () => import ('@/view/domain-name/private.vue')
+          }
         ]
     },
     {

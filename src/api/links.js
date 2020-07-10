@@ -13,6 +13,14 @@ export const getlinkslist = (page, limit, key, value) => {
     })
 }
 
+export const operationlinks = (data, meth) => {
+  return axios.request({
+    url: '/mg/v2/links/',
+    method: meth,
+    data
+  })
+}
+
 export const newlinks = (data) => {
     return axios.request({
         url: '/mg/v2/links/',
@@ -31,7 +39,7 @@ export const dellinks = (data) => {
 
 export const updatelinks = (data) => {
     return axios.request({
-        url: '/mg/v2/linksr/',
+        url: '/mg/v2/links/',
         method: 'put',
         data
     })
@@ -69,6 +77,14 @@ export const getUserByGroup = (groupId) => {
     })
 }
 
+export const operationlinksgroup = (data, meth) => {
+  return axios.request({
+    url: '/mg/v2/links/groups/',
+    method: meth,
+    data
+  })
+}
+
 export const newlinksgroup = (data) => {
 	return axios.request({
         url: '/mg/v2/links/groups/',
@@ -87,7 +103,7 @@ export const dellinksgroup = (data) => {
 
 export const updatelinksgroup = (data) => {
     return axios.request({
-        url: '/mg/v2/linksr/groups/',
+        url: '/mg/v2/links/groups/',
         method: 'put',
         data
     })

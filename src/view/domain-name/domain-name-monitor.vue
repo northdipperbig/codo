@@ -1,6 +1,7 @@
 <template>
   <div>
-    待完善
+    域名监控
+    HTTPS证书监控
   </div>
 </template>
 

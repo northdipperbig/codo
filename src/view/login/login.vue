@@ -20,12 +20,11 @@
 </template>
 
 <script>
-import { LoginForm,LoginMFA, RegisterForm, MFA } from '_c/login-form'
+import { LoginForm, RegisterForm, MFA } from '_c/login-form'
 import { mapActions } from 'vuex'
 export default {
   components: {
     LoginForm,
-    LoginMFA,
     RegisterForm,
     MFA
   },
@@ -43,10 +42,8 @@ export default {
   methods: {
     ...mapActions(['handleLogin', 'handleRegister']),
     handleSubmit ({ username, password, dynamic }) {
-      const nextUrl = this.$route.query.next_url
-        ? this.$route.query.next_url
-        : ''
-      this.handleLogin({ username, password, dynamic}).then(res => {
+      // const nextUrl = this.$route.query.next_url ? this.$route.query.next_url : ''
+      this.handleLogin({username, password, dynamic}).then(res => {
         if (res.code === 0) {
           this.$Message.success(`${res.msg}`)
           this.$router.push({
@@ -56,7 +53,7 @@ export default {
           // 这里弹出二次认证
           this.secoundAuth = true
           this.$Message.success(`${res.msg}`)
-        }  else if (res.code === -3) {
+        } else if (res.code === -3) {
           this.mail = res.email ? res.email : username
           this.username = res.username ? res.username : username.split('@')[0]
           this.$Message.success({
