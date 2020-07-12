@@ -33,8 +33,7 @@
               <Icon type="ios-download-outline"></Icon>导出数据
             </Button>
           </div>
-
-          <!-- <Table size="small" ref="selection" border :columns="columns":data="tableData"@on-selection-change="handleSelectChange"></Table> -->
+          <Detail :dialog="dialog2" :formData="formValidate" @e-close="closeModal"></Detail>
           <Table
             size="small"
             ref="selection"
@@ -181,11 +180,14 @@
 </template>
 
 <script>
-import { getprivatetree, getprivatelist } from '@/api/dnsprivate.js'
-import { getdomainlist, operationdomains } from '@/api/dns/domainlist.js'
+import Detail from './domains_detail'
+import { getprivatetree, getprivatelist } from '@/api/dnsprivate'
+import { getdomainlist, operationdomains, getdomaindetaillist } from '@/api/dns/domainlist'
 import { mapState } from 'vuex'
 export default {
-  components: {},
+  components: {
+    Detail
+  },
   data () {
     return {
       formValidateLinkTag: {
@@ -207,7 +209,7 @@ export default {
       logModal: false,
       logInfo: [],
       privateTreeData: [],
-      serverDetail: Object,
+      domainDetail: Object,
       dialog2: {
         show: false,
         title: '主机详情'
@@ -321,7 +323,7 @@ export default {
           sortable: true
         },
         {
-          title: '过期时间',
+          title: '到期续费时间',
           key: 'expired_time',
           width: 180,
           align: 'center',
@@ -538,6 +540,10 @@ export default {
     },
     // 获取主机信息
     getDomainList (key, value) {
+      if (key === '') {
+        this.$Message.error('请选择搜索类型')
+        return
+      }
       getdomainlist(this.pageNum, this.pageSize, key, value).then(res => {
         if (res.data.code === 0) {
           this.providerlist.forEach(function (v) {
@@ -590,6 +596,13 @@ export default {
         }
       })
     },
+    getDomainDetailList (dname) {
+      getdomaindetaillist(dname).then(res => {
+        if (res.data.code === 0) {
+          this.domainDetail = res.data.data
+        }
+      })
+    },
     // table 选中的ID
     handleSelectChange (val) {
       let SelectIdList = []
@@ -600,47 +613,23 @@ export default {
     },
     handleDetail (paramsRow) {
       this.dialog2.show = true
-      this.serverDetail = {
-        cpu: '',
-        cpu_count: '',
-        cpu_cores: '',
-        disk: '',
-        disk_utilization: '',
-        id: '',
-        // instance_id: null
-        // instance_type: null
-        ip: '',
-        memory: '',
-        sysinfo: '',
-        os_kernel: '',
-        sn: ''
-      }
-      this.getServerDetailList('ip', paramsRow.ip)
+      // this.serverDetail = {}
+      this.getDomainDetailList(paramsRow.domain_name)
       setTimeout(() => {
         this.formValidate = {
           id: paramsRow.id,
-          hostname: paramsRow.hostname,
-          ip: paramsRow.ip,
-          public_ip: paramsRow.public_ip,
-          port: paramsRow.port,
-          idc: paramsRow.idc,
-          region: paramsRow.region,
-          admin_user: paramsRow.admin_user,
-          tag_list: paramsRow.tag_list,
-          detail: paramsRow.detail,
-          expired_time: this.serverDetail.expired_time,
-          instance_id: this.serverDetail.instance_id,
-          instance_type: this.serverDetail.instance_type,
-          instance_state: this.serverDetail.instance_state,
-          cpu: this.serverDetail.cpu,
-          // cpu_count: this.serverDetail.cpu_count,
-          cpu_cores: this.serverDetail.cpu_cores,
-          memory: this.serverDetail.memory,
-          disk: this.serverDetail.disk,
-          os_type: this.serverDetail.os_type,
-          os_kernel: this.serverDetail.os_kernel,
-          sn: this.serverDetail.sn,
-          update_time: this.serverDetail.update_time
+          domain_name: paramsRow.domain_name,
+          plat_name: paramsRow.provider_name,
+          plat_id: this.domainDetail.domain_provider,
+          expired_time: this.domainDetail.expired_time,
+          create_time: this.domainDetail.create_time,
+          domain_locked: this.domainDetail.domain_locked,
+          auto_renew: this.domainDetail.auto_renew,
+          domain_status: this.domainDetail.domain_status,
+          domain_ns1: this.domainDetail.domain_ns1,
+          domain_ns2: this.domainDetail.domain_ns2,
+          ssl_cert_expired_time: this.domainDetail.ssl_cert_expired_time,
+          ssl_cert_expired_days: this.domainDetail.ssl_cert_expired_days
         }
       }, 500)
     },
